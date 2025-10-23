@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { EmailWaitlistForm } from "@/components/email-waitlist-form";
+import { PlaidConnectionViz } from "@/components/plaid-connection-viz";
 import { 
   Smartphone, 
   Download, 
@@ -22,14 +24,24 @@ import {
 export default function Home() {
   const [showStickyFooter, setShowStickyFooter] = useState(false);
   const [aiMessageIndex, setAiMessageIndex] = useState(0);
+  const [dashboardScreen, setDashboardScreen] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+
+  const dashboardScreens = [
+    { title: "All Accounts Linked", icon: LinkIcon, color: "accentStrong" },
+    { title: "Your Tax Deductions Found", icon: Receipt, color: "primaryStrong" },
+    { title: "This Month's Insights", icon: TrendingUp, color: "accentStrong" }
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
       setShowStickyFooter(scrollPercent > 80);
+      setScrollY(window.scrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Set initial value
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -58,6 +70,14 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDashboardScreen((prev) => (prev + 1) % 3);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -74,6 +94,71 @@ export default function Home() {
               hsl(var(--primary)) 100%)`
           }}
         />
+
+        {/* Floating Parallax Elements */}
+        <div className="absolute inset-0 -z-5 pointer-events-none overflow-hidden">
+          {/* Receipt Card - Top Left */}
+          <div 
+            className="absolute top-20 left-[5%] opacity-20"
+            style={{ 
+              transform: `translateY(${scrollY * 0.15}px) rotate(-5deg)`
+            }}
+          >
+            <Card className="p-6 bg-white/80 backdrop-blur-sm shadow-xl w-40">
+              <Receipt className="h-8 w-8 text-primaryStrong mb-2" />
+              <div className="h-2 bg-gray-300 rounded mb-2" />
+              <div className="h-2 bg-gray-200 rounded w-3/4" />
+            </Card>
+          </div>
+
+          {/* Pie Chart - Top Right */}
+          <div 
+            className="absolute top-32 right-[8%] opacity-20"
+            style={{ 
+              transform: `translateY(${scrollY * 0.2}px) rotate(5deg)`
+            }}
+          >
+            <Card className="p-6 bg-white/80 backdrop-blur-sm shadow-xl w-44">
+              <div className="relative h-24 w-24 rounded-full border-8 border-accentStrong border-r-transparent border-b-transparent rotate-45" />
+            </Card>
+          </div>
+
+          {/* Category Icon - Bottom Left */}
+          <div 
+            className="absolute bottom-40 left-[10%] opacity-15"
+            style={{ 
+              transform: `translateY(${-scrollY * 0.1}px) rotate(10deg)`
+            }}
+          >
+            <Card className="p-4 bg-white/80 backdrop-blur-sm shadow-xl w-32">
+              <Calculator className="h-10 w-10 text-accentStrong" />
+            </Card>
+          </div>
+
+          {/* Wallet Icon - Bottom Right */}
+          <div 
+            className="absolute bottom-32 right-[12%] opacity-15"
+            style={{ 
+              transform: `translateY(${-scrollY * 0.12}px) rotate(-8deg)`
+            }}
+          >
+            <Card className="p-4 bg-white/80 backdrop-blur-sm shadow-xl w-28">
+              <Wallet className="h-10 w-10 text-primaryStrong" />
+            </Card>
+          </div>
+
+          {/* Bar Chart - Middle Right */}
+          <div 
+            className="absolute top-1/2 right-[5%] opacity-15"
+            style={{ 
+              transform: `translateY(${scrollY * 0.18}px) rotate(-3deg)`
+            }}
+          >
+            <Card className="p-4 bg-white/80 backdrop-blur-sm shadow-xl w-36">
+              <BarChart3 className="h-12 w-12 text-accentStrong" />
+            </Card>
+          </div>
+        </div>
         
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10 py-20">
           {/* Brand */}
@@ -91,27 +176,21 @@ export default function Home() {
             Centax helps you stay in control of your money — effortlessly. Track your business and personal finances in one place, uncover hidden tax write-offs, and get AI-guided insights that make managing money feel easy.
           </p>
 
+          {/* Email Waitlist Form */}
+          <div className="fade-in-section opacity-0 translate-y-5 transition-all duration-1000 delay-500 mb-6">
+            <EmailWaitlistForm variant="hero" placeholder="Enter your email for early access" />
+          </div>
+
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center fade-in-section opacity-0 translate-y-5 transition-all duration-1000 delay-500">
-            <Button 
-              size="lg" 
-              className="text-base px-8 py-6 rounded-full text-white border-0"
-              style={{
-                background: `linear-gradient(135deg, hsl(var(--button-gradient-start)), hsl(var(--button-gradient-end)))`
-              }}
-              data-testid="button-download-app-hero"
-            >
-              <Download className="mr-2 h-5 w-5" />
-              Download the App
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center fade-in-section opacity-0 translate-y-5 transition-all duration-1000 delay-600">
             <Button 
               size="lg" 
               variant="outline"
               className="text-base px-8 py-6 rounded-full bg-white/10 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white/20"
-              data-testid="button-join-early-access-hero"
+              data-testid="button-download-app-hero"
             >
-              <Smartphone className="mr-2 h-5 w-5" />
-              Join Early Access
+              <Download className="mr-2 h-5 w-5" />
+              Download the App
             </Button>
           </div>
         </div>
@@ -131,21 +210,48 @@ export default function Home() {
               </p>
             </div>
             <div className="fade-in-section opacity-0 translate-x-10 transition-all duration-1000 delay-200">
-              <Card className="p-8 bg-card border-card-border shadow-lg">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3 p-4 bg-accentLight/10 rounded-lg">
-                    <LinkIcon className="h-6 w-6 text-accentStrong" />
-                    <span className="font-medium text-card-foreground">All Accounts Linked</span>
-                  </div>
-                  <div className="flex items-center gap-3 p-4 bg-primaryStrong/10 rounded-lg">
-                    <Receipt className="h-6 w-6 text-primaryStrong" />
-                    <span className="font-medium text-card-foreground">Your Tax Deductions Found</span>
-                  </div>
-                  <div className="flex items-center gap-3 p-4 bg-accentLight/10 rounded-lg">
-                    <TrendingUp className="h-6 w-6 text-accentStrong" />
-                    <span className="font-medium text-card-foreground">This Month's Insights</span>
-                  </div>
-                </div>
+              <Card className="p-8 bg-card border-card-border shadow-lg relative overflow-hidden min-h-[320px] flex items-center justify-center">
+                {dashboardScreens.map((screen, index) => {
+                  const Icon = screen.icon;
+                  const isActive = index === dashboardScreen;
+                  return (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 p-8 flex flex-col items-center justify-center transition-all duration-1000 ${
+                        isActive 
+                          ? 'opacity-100 scale-100' 
+                          : 'opacity-0 scale-95 pointer-events-none'
+                      }`}
+                    >
+                      <div className={`mb-6 p-6 rounded-full ${
+                        screen.color === 'primaryStrong' 
+                          ? 'bg-primaryStrong/10' 
+                          : 'bg-accentStrong/10'
+                      }`}>
+                        <Icon className={`h-16 w-16 ${
+                          screen.color === 'primaryStrong' 
+                            ? 'text-primaryStrong' 
+                            : 'text-accentStrong'
+                        }`} />
+                      </div>
+                      <h3 className="font-serif text-2xl md:text-3xl text-card-foreground text-center mb-4">
+                        {screen.title}
+                      </h3>
+                      <div className="flex gap-2">
+                        {dashboardScreens.map((_, dotIndex) => (
+                          <div
+                            key={dotIndex}
+                            className={`h-2 rounded-full transition-all duration-300 ${
+                              dotIndex === dashboardScreen
+                                ? 'w-8 bg-primaryStrong'
+                                : 'w-2 bg-muted'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
               </Card>
             </div>
           </div>
@@ -220,6 +326,11 @@ export default function Home() {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Powerful features designed to make managing your finances effortless.
             </p>
+          </div>
+
+          {/* Plaid Connection Visualization */}
+          <div className="mb-16 fade-in-section opacity-0 scale-95 transition-all duration-1000 max-w-3xl mx-auto">
+            <PlaidConnectionViz />
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -445,15 +556,11 @@ export default function Home() {
               Centax helps you manage your money, maximize deductions, and simplify your taxes. Start today and let AI do the heavy lifting.
             </p>
 
+            <div className="mb-8">
+              <EmailWaitlistForm variant="hero" placeholder="Enter your email to get started" />
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="text-base px-8 py-6 rounded-full bg-white text-primaryStrong hover:bg-white/90"
-                data-testid="button-get-early-access-cta"
-              >
-                <Smartphone className="mr-2 h-5 w-5" />
-                Get Early Access
-              </Button>
               <Button 
                 size="lg" 
                 variant="outline"
