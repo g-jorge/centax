@@ -1,0 +1,64 @@
+HERO SECTION
+Headline:
+Your AI-Assisted Personal Accountant
+Subheadline:
+Centax helps you stay in control of your money — effortlessly.
+Track your business and personal finances in one place, uncover hidden tax write-offs, and get AI-guided insights that make managing money feel easy.
+CTA Buttons:
+[Download the App]
+[Join Early Access]
+(Background: subtle gradient using your primaryMedium → primarySuperLight tones, with floating card/receipt visuals in the hero mockup.)
+SECTION 1: Problem → Solution
+Headline:
+Self-employed finances are complicated.
+Centax makes them simple.
+Body:
+Managing income, expenses, and taxes shouldn’t feel like a guessing game. Whether you’re a freelancer, creator, or small business owner, Centax brings clarity to your finances — so you always know where your money’s going and how much to save for taxes.
+Visual Suggestion:
+Animated dashboard mockup fading between “All Accounts Linked”, “Your Tax Deductions Found”, and “This Month’s Insights” screens.
+SECTION 2: Core Value Props
+Three Pillars:
+💸 All Your Finances, Unified
+Link your bank accounts securely with Plaid and see your personal and business finances together — income, expenses, and balances, all in one clear view.
+🧾 Smarter Tax Savings
+Centax automatically scans your transactions, finds potential write-offs, and keeps you audit-ready. No spreadsheets. No stress.
+🤖 AI That Knows You
+Your built-in GPT-powered advisor explains tax rules in plain English, helps plan quarterly taxes, and offers proactive insights so you never miss a deduction or deadline.
+SECTION 3: Features Snapshot
+Use a clean 2-column grid (white cards with light drop shadows and icons in your accent color):
+🔗 Bank Account Linking — Securely connect your accounts via Plaid.
+🧮 Automatic Categorization — Smart tagging that separates business and personal spending.
+🪄 Tax Deduction Detection — Identify deductible expenses in real time.
+📊 Budgeting & Forecasting — Visual dashboards that show your spending trends.
+💬 AI Chatbot — Ask questions like “How much can I deduct for meals?” and get instant answers.
+🔔 Alerts & Reminders — Stay on top of tax deadlines and spending limits.
+📈 Reports & Insights — See what’s driving your cash flow and how to improve it.
+(Optional note for MVP: Hide Quarterly Tax Estimates and Invoicing until post-launch.)
+SECTION 4: AI Assistant Spotlight
+Headline:
+Meet your financial co-pilot.
+Body:
+Ask Centax anything — from “What can I deduct from my last trip?” to “How do I plan for quarterly taxes?”
+Your AI-powered accountant learns from your activity, guides you through every decision, and gives you personalized insights built around your profession.
+(Visual idea: chat bubble interface showing a user asking “Can I write off my laptop?” → AI reply with simplified IRS explanation.)
+SECTION 5: Security & Trust
+Headline:
+Bank-level security. Tax-level precision.
+Body:
+Centax uses encrypted connections through Plaid for bank linking, and securely stores your data in Firebase and Google Cloud. Your financial information is protected, and your insights are personalized — never shared.
+(Visual idea: lock icon + cloud outline, matching your accentStrong color.)
+SECTION 6: Closing CTA
+Headline:
+Take control of your finances — with confidence.
+Subheadline:
+Centax helps you manage your money, maximize deductions, and simplify your taxes.
+Start today and let AI do the heavy lifting.
+CTA Buttons:
+[Get Early Access]
+[Download the App]
+Visual & Brand Notes
+Font pairing: “Gloock” for Centax brand mark and hero headlines → creates trust + sophistication.
+“DM Sans” for body copy → clean and modern.
+Primary color usage: Buttons and callouts should use primaryStrong (rgb(215,73,50)) with gradient hover states using buttonGradientStart → buttonGradientEnd.
+Accent color: Use accent (rgba(11,153,177,1)) for links, icons, and AI-related highlights.
+Tone: Professional yet friendly. Reassuring, not intimidating.

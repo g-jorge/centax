@@ -1,0 +1,56 @@
+Landing Page Structure + Animation Guide for Centax
+🏠 1. Hero Section — “Scroll-in Reveal + Gradient Motion”
+Visual style:
+Full-bleed gradient background (primaryMedium → primarySuperLight)
+Brand wordmark Centax in Gloock font
+Tagline fade-in from bottom on scroll
+Floating cards (receipts, pie charts, category icons) using parallax movement
+Code Description (Replit HTML/CSS/JS ready):
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="fade-in">Your AI-Assisted Personal Accountant</h1>
+    <p class="slide-up">See your business and personal finances in one place. Find hidden write-offs. Stay tax confident.</p>
+    <button class="cta">Join Early Access</button>
+  </div>
+</section>
+Animation (CSS/JS):
+.fade-in { opacity: 0; transform: translateY(20px); transition: all 1s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+// Intersection observer
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'))
+})
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el))
+🧭 2. Problem → Solution Scroll Scene
+As the user scrolls:
+Left side: text fades in (e.g., “Managing finances shouldn’t feel like guesswork”).
+Right side: background image switches (cards showing Centax dashboard snippets).
+Sticky container ensures text transitions feel layered.
+Effect: “As you scroll, the problem fades out and the Centax solution fades in.”
+💡 3. Dynamic Features Section (like Avelis “How It Works”)
+Each feature appears sequentially with a smooth slide-in-from-right effect and a matching UI mockup that morphs (using CSS scale/fade or Lottie animations).
+Example:
+1️⃣ “Bank Account Linking” → shows a Plaid connection animation
+2️⃣ “Smart Categorization” → icon tiles rearrange on scroll
+3️⃣ “Tax Deduction Detection” → deduction badges pop in
+Use GSAP or Framer Motion (if React-based) to control scroll triggers:
+gsap.utils.toArray('.feature').forEach((section, i) => {
+  gsap.from(section, {
+    scrollTrigger: { trigger: section, start: 'top 80%', toggleActions: 'play none none reverse' },
+    opacity: 0, x: 100, duration: 1, delay: i * 0.1
+  })
+})
+🤖 4. AI Assistant Section (Interactive Spotlight)
+Background transitions to dark (backgroundSecondary → accentStrong).
+A chat mockup animates in — text messages fade one by one:
+“Can I write off my laptop?” → fade →
+“Yes, if used primarily for business. Here's how to document it.”
+This creates a conversational storytelling rhythm like Avelis’s “Post-Payment Audit Engine” section.
+🔒 5. Security Section (Subtle Motion)
+Use fade-in + parallax background of cloud icons or lock illustrations in accentLight.
+Text reveals vertically as the user scrolls:
+“Bank-level encryption. Tax-level precision.”
+🚀 6. Call to Action (Sticky Footer Style)
+As the user finishes scrolling, a sticky footer bar slides up with:
+“Take control of your finances — with Centax.”
+and a glowing “Join Early Access” button using your gradient tokens (buttonGradientStart → buttonGradientEnd).
