@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { lightTheme } from "./client/src/constants/lightTheme"; // adjust the path
 
 export default {
   darkMode: ["class"],
@@ -6,13 +7,60 @@ export default {
   theme: {
     extend: {
       borderRadius: {
-        lg: ".5625rem", /* 9px */
-        md: ".375rem", /* 6px */
-        sm: ".1875rem", /* 3px */
+        lg: ".5625rem" /* 9px */,
+        md: ".375rem" /* 6px */,
+        sm: ".1875rem" /* 3px */,
       },
+      fontSize: {
+        hero: [
+          "clamp(2.75rem, 6vw, 4.5rem)",
+          { lineHeight: "1.1", fontWeight: "600" },
+        ], // Centax main title
+        headline: [
+          "clamp(2rem, 4.5vw, 3.5rem)",
+          { lineHeight: "1.15", fontWeight: "500" },
+        ], // Section titles (Your AI-Assisted..., etc.)
+        section: [
+          "clamp(1.75rem, 3.5vw, 2.75rem)",
+          { lineHeight: "1.2", fontWeight: "500" },
+        ], // Sub-sections like "Self-employed finances..."
+        subheadline: [
+          "clamp(1.25rem, 2.5vw, 1.75rem)",
+          { lineHeight: "1.4", fontWeight: "400" },
+        ], // Supporting text under hero/section
+        cardTitle: ["1.25rem", { lineHeight: "1.4", fontWeight: "600" }], // Card headings like “All Your Finances, Unified”
+        cardBody: ["1rem", { lineHeight: "1.6", fontWeight: "400" }], // Paragraphs inside cards
+
+        // 💬 CHAT / CTA / SMALL TEXT
+        message: ["1rem", { lineHeight: "1.5", fontWeight: "400" }], // AI chat message text
+        button: ["1rem", { lineHeight: "1.4", fontWeight: "500" }], // Buttons like “Download the App”
+        footerTitle: ["1.25rem", { lineHeight: "1.3", fontWeight: "500" }], // “Ready to simplify…” text in sticky footer
+        footerSub: ["0.875rem", { lineHeight: "1.4", fontWeight: "400" }], // “Join thousands…” smaller text
+        caption: ["0.875rem", { lineHeight: "1.4", fontWeight: "400" }], // small text elements
+
+        // 🧭 SYSTEM TEXT / UTILITIES
+        base: ["1rem", { lineHeight: "1.6", fontWeight: "400" }], // default paragraph text
+        lg: ["1.125rem", { lineHeight: "1.6", fontWeight: "400" }], // slightly larger body
+        sm: ["0.875rem", { lineHeight: "1.5", fontWeight: "400" }], // small detailsa
+      },
+
       colors: {
         // Flat / base colors (regular buttons)
-        background: "hsl(var(--background) / <alpha-value>)",
+        company: lightTheme.colors.company,
+
+        secondaryLight: lightTheme.colors.secondaryLight,
+        secondaryMedium: lightTheme.colors.secondaryMedium,
+        secondaryStrong: lightTheme.colors.secondaryStrong,
+
+        success: lightTheme.colors.success,
+        warning: lightTheme.colors.warning,
+        error: lightTheme.colors.error,
+
+        background: lightTheme.colors.background,
+
+        textPrimary: lightTheme.colors.textPrimary,
+        textSecondary: lightTheme.colors.textSecondary,
+
         foreground: "hsl(var(--foreground) / <alpha-value>)",
         border: "hsl(var(--border) / <alpha-value>)",
         input: "hsl(var(--input) / <alpha-value>)",
@@ -73,7 +121,7 @@ export default {
         "sidebar-accent": {
           DEFAULT: "hsl(var(--sidebar-accent) / <alpha-value>)",
           foreground: "hsl(var(--sidebar-accent-foreground) / <alpha-value>)",
-          border: "var(--sidebar-accent-border)"
+          border: "var(--sidebar-accent-border)",
         },
         status: {
           online: "rgb(34 197 94)",
@@ -94,6 +142,7 @@ export default {
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
       },
+
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

@@ -11,7 +11,10 @@ interface EmailWaitlistFormProps {
   placeholder?: string;
 }
 
-export function EmailWaitlistForm({ variant = "inline", placeholder = "Enter your email" }: EmailWaitlistFormProps) {
+export function EmailWaitlistForm({
+  variant = "inline",
+  placeholder = "Enter your email",
+}: EmailWaitlistFormProps) {
   const [email, setEmail] = useState("");
   const { toast } = useToast();
 
@@ -52,13 +55,19 @@ export function EmailWaitlistForm({ variant = "inline", placeholder = "Enter you
   const isHero = variant === "hero";
 
   return (
-    <form 
-      onSubmit={handleSubmit} 
-      className={`flex ${isHero ? 'flex-col sm:flex-row' : 'flex-row'} gap-3 ${isHero ? 'max-w-md mx-auto' : 'w-full'}`}
+    <form
+      onSubmit={handleSubmit}
+      className={`flex ${isHero ? "flex-col sm:flex-row" : "flex-row"} gap-3 ${
+        isHero ? "max-w-md mx-auto" : "w-full"
+      }`}
       data-testid="form-waitlist"
     >
       <div className="flex-1 relative">
-        <Mail className={`absolute left-3 ${isHero ? 'top-1/2 -translate-y-1/2' : 'top-1/2 -translate-y-1/2'} h-5 w-5 text-muted-foreground pointer-events-none`} />
+        <Mail
+          className={`absolute left-3 ${
+            isHero ? "top-1/2 -translate-y-1/2" : "top-1/2 -translate-y-1/2"
+          } h-5 w-5 text-muted-foreground pointer-events-none`}
+        />
         <Input
           type="email"
           placeholder={placeholder}
@@ -66,7 +75,9 @@ export function EmailWaitlistForm({ variant = "inline", placeholder = "Enter you
           onChange={(e) => setEmail(e.target.value)}
           required
           disabled={mutation.isPending}
-          className={`${isHero ? 'h-12 text-base' : 'h-10'} pl-10 ${isHero ? 'bg-white/90 backdrop-blur-sm border-white/30' : ''}`}
+          className={`${isHero ? "h-12 text-base" : "h-10"} pl-10 ${
+            isHero ? "bg-white/90 backdrop-blur-sm border-white/30" : ""
+          }`}
           data-testid="input-waitlist-email"
         />
       </div>
@@ -74,12 +85,19 @@ export function EmailWaitlistForm({ variant = "inline", placeholder = "Enter you
         type="submit"
         disabled={mutation.isPending || !email.trim()}
         size={isHero ? "lg" : "default"}
-        className={isHero ? "rounded-full px-8" : ""}
-        style={isHero ? {
-          background: `linear-gradient(135deg, hsl(var(--button-gradient-start)), hsl(var(--button-gradient-end)))`,
-          color: 'white',
-          border: 'none'
-        } : undefined}
+        className={`${isHero ? "rounded-full px-8" : ""} font-bold text-lg`}
+        style={
+          isHero
+            ? {
+                background:
+                  "linear-gradient(135deg, hsl(var(--primary-strong)) 0%, hsl(var(--accent-strong)) 100%)",
+                color: "white",
+                border: "none",
+                boxShadow:
+                  "0 4px 20px rgba(255, 255, 255, 0.2), 0 0 20px rgba(255, 100, 50, 0.3)",
+              }
+            : undefined
+        }
         data-testid="button-waitlist-submit"
       >
         {mutation.isPending ? (
@@ -93,7 +111,7 @@ export function EmailWaitlistForm({ variant = "inline", placeholder = "Enter you
             Joined!
           </>
         ) : (
-          "Join Waitlist"
+          "Join Now"
         )}
       </Button>
     </form>
